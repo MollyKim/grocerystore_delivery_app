@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'category.dart';
+import 'mypage.dart';
+import 'home.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +17,11 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        '/home': (context) => Home(),
+        '/category': (context) => Category(),
+        '/Mypage': (context) => Mypage(),
+      },
     );
   }
 }
@@ -27,6 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _index = 0;
+  var _pages = [Home(), Category(), Mypage()];
 
   @override
   Widget build(BuildContext context) {
@@ -34,23 +43,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add_shopping_cart),
+            icon: Icon(Icons.shopping_cart),
             onPressed: () {},
           ),
         ],
-        backgroundColor: Colors.white24,
+        backgroundColor: Colors.blueAccent[100],
         title: Text(
           '한국유통 배달 어플',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-          '$_index 페이지',
-          style: TextStyle(fontSize: 40),
-        ),
-      ),
+      body: _pages[_index],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {
